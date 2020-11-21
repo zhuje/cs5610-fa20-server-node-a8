@@ -1,53 +1,50 @@
-// cli : node server.js
-// browser: localhost/3000/quizzes
 
+// Services will statically hold data
+// and return a response back to the
+// controller which will deliver it
+// to the client
 
-module.exports = (app) => {
-  let quizzes = [
-    {_id: "123", title: "quiz 1"},
-    {_id: "234", title: "quiz 2"},
-    {_id: "345", title: "quiz 3"},
-  ]
+// Services should later be implemented
+// to communicate with a database
+// MongoDB to manipulate and fetch data so
+// all our data can persist on the database
+// rather than be statically held here.
 
-  const findAllQuizzes = (req, res) => {
-    res.send(quizzes)
-  }
+// import array of quizzes
+let quizzes = require("./quizzes");
 
-  const findQuizById = (req, res) => {
-    const quizId = req.params["qid"]
-    const quiz = quizzes.find(quiz => quiz._id === quizId)
-    res.send(quiz)
-  }
+const findAllQuizzes = () => {
+    return quizzes;
+};
 
-  const createQuiz = (req, res) => {
-    const quiz = {_id: (new Date()).getTime()+"", title: "New Quiz"}
-    quizzes.push(quiz)
-    res.send(quiz)
-  }
+// @param qid -- quiz ID
+const findQuizById = (qid) => {
+    const quiz = quizzes.find(quiz => quiz._id === qid);
+    return (quiz)
+};
 
-  const deleteQuiz = (req, res) => {
-    const qid = req.params.qid
-    quizzes = quizzes.filter(quiz => quiz._id !== qid)
-    res.send(200)
-  }
-
-  const updateQuiz = (req, res) => {
-    const qid = req.params.qid
-    const newQuiz = req.body
-    quizzes = quizzes.map(quiz => quiz._id === qid ? newQuiz : quiz)
-    res.send(200)
-  }
-
-  // allow express (object 'app') to handle all incoming
-  // client requests
-  // app -- express instance
-  // .get/ .post / .delete -- client request methods
-  // "/foo/bar" -- first arg is the URL request is coming from
-  // findQuizById, etc. -- second arg is the function in the server to call
-  app.get("/quizzes/:qid", findQuizById)
-  app.get("/quizzes", findAllQuizzes)
-  app.post("/quizzes", createQuiz)
-  app.delete("/quizzes/:qid", deleteQuiz)
-  app.put("/quizzes/:qid", updateQuiz)
+const createQuiz = () => {
+    const quiz = {_id: (new Date()).getTime()+"", title: "New Quiz"};
+    quizzes.push(quiz);
+    return(quiz)
 }
 
+// @param qid -- quiz ID
+// return 200 -- returns true/ok
+const deleteQuiz = (qid) => {
+    quizzes = quizzes.filter(quiz => quiz._id !== qid);
+    return 200;
+}
+
+// @param qid -- quiz ID
+// return 200 -- returns true/ok
+const updateQuiz = (qid) => {
+    const newQuiz = req.body;
+    quizzes = quizzes.map(quiz => quiz._id === qid ? newQuiz : quiz);
+    return 200;
+}
+
+// From this module export the following functions :
+module.exports = {
+    findAllQuizzes, findQuizById, createQuiz, deleteQuiz, updateQuiz
+}
