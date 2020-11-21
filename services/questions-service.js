@@ -8,6 +8,7 @@ module.exports = (app) => {
     {_id: "678", question: "What's your favorite season", quizId: "345"},
   ]
 
+
   app.get("/quizzes/:qid/questions", (req, res) => {
     const quizId = req.params["qid"]
     const questionsForQuiz = questions.filter(question => question.quizId === quizId)

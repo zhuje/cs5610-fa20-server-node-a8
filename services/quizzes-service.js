@@ -1,3 +1,6 @@
+// cli : node server.js
+// browser: localhost/3000/quizzes
+
 
 module.exports = (app) => {
   let quizzes = [
@@ -35,6 +38,12 @@ module.exports = (app) => {
     res.send(200)
   }
 
+  // allow express (object 'app') to handle all incoming
+  // client requests
+  // app -- express instance
+  // .get/ .post / .delete -- client request methods
+  // "/foo/bar" -- first arg is the URL request is coming from
+  // findQuizById, etc. -- second arg is the function in the server to call
   app.get("/quizzes/:qid", findQuizById)
   app.get("/quizzes", findAllQuizzes)
   app.post("/quizzes", createQuiz)
