@@ -1,5 +1,5 @@
-// cli : node server.js
-// browser: localhost/3000/quizzes
+// To Run -- on terminal enter:  node server.js OR npm start
+// Point browser to :  localhost:3000/quizzes
 
 // Controller will interact with client
 // by listening to http requests and
@@ -28,18 +28,20 @@ module.exports = (app) => {
         .then(quiz => res.send(quiz))
   }
 
+  const findQuizByIdDetails = (req, res) => {
+    quizzesService.findQuizByIdDetails(req.params.qid)
+        .then(quiz => res.send(quiz))
+  }
+
+
+
   const createQuiz = (req, res) => {
-    // const fooVarValueParam = req.body.fooKeyParam
-    // res.send(quizzesService.createQuiz())
-    // quizzesService.createQuiz(req.body.quiz)
     quizzesService.createQuiz()
         .then(actualQuiz => res.send(actualQuiz))
   }
 
   const deleteQuiz = (req, res) => {
-    // const qid = req.params.qid
-    // res.send(quizzesService.deleteQuiz(qid))
-    const qid = req.params.qid
+    const qid = req.params.qid;
     quizzesService.deleteQuiz(qid)
         .then(status => res.send(status))
 
@@ -55,6 +57,12 @@ module.exports = (app) => {
         .then(status => res.send(status))
   }
 
+  const findAllQuizzesDetails = (req, res) => {
+    quizzesService.findAllQuizzesDetails()
+        .then(quizzes => res.send(quizzes))
+  };
+
+
   // allow express (object 'app') to handle all incoming
   // client requests
   // app -- express instance
@@ -66,5 +74,7 @@ module.exports = (app) => {
   app.post("/quizzes", createQuiz)
   app.delete("/quizzes/:qid", deleteQuiz)
   app.put("/quizzes/:qid", updateQuiz)
+  app.get("/quizzes-details", findAllQuizzesDetails)
+  app.get("/quizzes/:qid/details" , findQuizByIdDetails)
 }
 
