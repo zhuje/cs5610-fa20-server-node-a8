@@ -17,22 +17,32 @@ module.exports = (app) => {
   // res -- response
   // creates a communication between client and this server
   const findAllQuizzes = (req, res) => {
-    res.send(quizzesService.findAllQuizzes())
+    quizzesService.findAllQuizzes()
+        .then(quizzes => res.send(quizzes))
   }
 
   const findQuizById = (req, res) => {
     // const quizId = req.params["qid"]
-    res.send(quizzesService.findQuizById(req.params.qid))
+    // res.send(quizzesService.findQuizById(req.params.qid))
+    quizzesService.findQuizById(req.params.qid)
+        .then(quiz => res.send(quiz))
   }
 
   const createQuiz = (req, res) => {
     // const fooVarValueParam = req.body.fooKeyParam
-    res.send(quizzesService.createQuiz())
+    // res.send(quizzesService.createQuiz())
+    // quizzesService.createQuiz(req.body.quiz)
+    quizzesService.createQuiz()
+        .then(actualQuiz => res.send(actualQuiz))
   }
 
   const deleteQuiz = (req, res) => {
+    // const qid = req.params.qid
+    // res.send(quizzesService.deleteQuiz(qid))
     const qid = req.params.qid
-    res.send(quizzesService.deleteQuiz(qid))
+    quizzesService.deleteQuiz(qid)
+        .then(status => res.send(status))
+
   }
 
   const updateQuiz = (req, res) => {
@@ -41,8 +51,8 @@ module.exports = (app) => {
     // the whole body of the http quest which should contain an object for a new quiz
     // can specify specific attribute of body with 'req.body.fooKey'
     const newQuiz = req.body
-    // quizzes = quizzes.map(quiz => quiz._id === qid ? newQuiz : quiz)
-    res.send(quizzesService.updateQuiz(qid, newQuiz))
+    quizzesService.updateQuiz(qid, newQuiz)
+        .then(status => res.send(status))
   }
 
   // allow express (object 'app') to handle all incoming

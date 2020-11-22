@@ -13,14 +13,14 @@ const app = express()
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/whiteboard', {useNewUrlParser: true});
 
-// Set the structure of the document to send form here (server) to MongoDB (database)
-// and assign it to a collection in MongoDB
-const quizSchema = mongoose.Schema({title: String}, {collection: "quizzes"})
-// Envelop the schema in a 'model' and give it a unique identifier for this session.
-const quizModel = mongoose.model("QuizModel", quizSchema)
-
-quizModel.find()
-    .then(quizzes => console.log(quizzes))
+// // Set the structure of the document to send form here (server) to MongoDB (database)
+// // and assign it to a collection in MongoDB
+// const quizSchema = mongoose.Schema({title: String}, {collection: "quizzes"})
+// // Envelop the schema in a 'model' and give it a unique identifier for this session.
+// const quizModel = mongoose.model("QuizModel", quizSchema)
+//
+// quizModel.find()
+//     .then(quizzes => console.log(quizzes))
 
 
 const bodyParser = require('body-parser')
