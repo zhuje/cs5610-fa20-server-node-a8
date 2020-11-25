@@ -1,7 +1,7 @@
 
 const mongoose = require("mongoose");
 
-const quizSchema = mongoose.Schema(
+const quizzesSchemaServer = mongoose.Schema(
     {
         title: String,
         questions: [{
@@ -10,4 +10,4 @@ const quizSchema = mongoose.Schema(
         }]
     }, {collection: "quizzes"})
 
-module.exports = quizSchema;
+module.exports = quizzesSchemaServer;

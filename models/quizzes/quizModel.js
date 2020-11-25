@@ -2,7 +2,7 @@
 // import mongoose -- a mongodb CLI
 const mongoose = require("mongoose");
 // import quiz schema
-const quizSchema = require("./quizSchema")
+const quizSchema = require("./quizzes.schema.server")
 // import quiz model
 const quizModel = mongoose.model("QuizModel", quizSchema)
 
