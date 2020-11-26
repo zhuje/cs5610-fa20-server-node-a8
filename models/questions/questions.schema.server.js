@@ -24,6 +24,7 @@ const mongoose = require("mongoose");
 const questionsSchemaServer = mongoose.Schema(
     // attributes of the document object
     {
+        _id: String,
         title: String,
         question: String,
         correct: String,
@@ -32,6 +33,6 @@ const questionsSchemaServer = mongoose.Schema(
         choices:[String],
     },
     // which collection we should refer to to manipulate data
-    {collection: "questions"})
+    {collection: "questions"});
 
 module.exports = questionsSchemaServer;
