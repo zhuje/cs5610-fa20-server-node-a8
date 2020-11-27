@@ -5,5 +5,5 @@ module.exports = (app) => {
         .then(attempt => res.send(attempt)));
     app.get('/api/quizzes/:qid/attempts', (req, res) =>
         quizAttemptDao.findAttemptsForQuiz(req.params.qid)
-            .then(attempts => res.send(attempts)));
+            .then(attempts => res.send(attempts)))
 };

@@ -3,7 +3,8 @@ const questionSchema = require('../questions/questions.schema.server');
 const quizAttempts = mongoose.Schema(
     {
         score: Number,
-        quiz: {type: mongoose.Schema.Types.ObjectId, ref: 'QuizzesModel'},
+        quiz: {type: mongoose.Schema.Types.String, ref: 'QuizzesModel'},
+        // quiz: "String",
         answers: [questionSchema]
     }, {collection:'quizAttempts'}
     )
