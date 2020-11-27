@@ -53,9 +53,15 @@ app.use(function (req, res, next) {
     next();
 });
 
+// const mongoose = require('mongoose');
+// mongoose.connect('mongodb://localhost/whiteboard2',
+//                  {useNewUrlParser: true});
+
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/whiteboard2',
-                 {useNewUrlParser: true});
+const connection = "mongodb+srv://admin:admincs5610@cluster0.lza6i.mongodb.net/CS5610_A9retryWrites=true&w=majority";
+mongoose.connect(connection,{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false})
+    .then(() => console.log("Database Connected Successfully"))
+    .catch(err => console.log(err));
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
